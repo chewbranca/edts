@@ -11,7 +11,7 @@ MELPA_REPO=https://github.com/milkypostman/melpa.git
 package:
 	@git clone $(MELPA_REPO) 2>/dev/null package/melpa || echo melpa already cloned
 	@rm -rf melpa/working
-	$(EMACS) --no-site-file --batch -L melpa -L package -l edts-pkg-build
+	$(EMACS) --no-site-file --batch -L package/melpa -L package -l edts-pkg-build
 
 .PHONY: all
 all: submodule-update libs plugins
