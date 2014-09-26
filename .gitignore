@@ -13,3 +13,5 @@ erl_crash.dump
 *.beam
 *.elc
 *.plt
+/package/melpa
+/package/*.tar

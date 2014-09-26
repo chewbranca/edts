@@ -3,6 +3,16 @@ PLUGINS = $(subst plugins/,,$(wildcard plugins/*))
 export ERL_LIBS:=`pwd`"/lib"
 EMACS?= "emacs"
 
+EVAL=
+
+MELPA_REPO=https://github.com/milkypostman/melpa.git
+# Requires melpa to be on the default load-path
+.PHONY: package
+package:
+	@git clone $(MELPA_REPO) 2>/dev/null package/melpa || echo melpa already cloned
+	@rm -rf melpa/working
+	$(EMACS) --no-site-file --batch -L melpa -L package -l edts-pkg-build
+
 .PHONY: all
 all: submodule-update libs plugins
 
