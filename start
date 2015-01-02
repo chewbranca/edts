@@ -27,9 +27,11 @@ PLUGIN_DIR=$EDTS_HOME/plugins
 
 cd $EDTS_HOME
 exec $ERL \
-    -sname edts \
+    -name edts@127.0.0.1 \
     -config "$EDTS_HOME/lib/edts/priv/app" \
     -edts project_data_dir "\"$PROJDIR\"" \
     -edts plugin_dir "\"$PLUGIN_DIR\"" \
     -pa $EDTS_HOME/{lib,plugins}/*/ebin \
-    -s edts_app
+    -s edts_app \
+    -hidden
+

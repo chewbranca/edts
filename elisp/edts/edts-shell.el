@@ -83,6 +83,23 @@ the erlang process."
       (when switch-to (switch-to-buffer buffer))
       buffer)))
 
+(defun edts-shell-node1 (&optional pwd switch-to)
+  "Start an interactive erlang shell."
+  (interactive '(nil t))
+  (edts-api-ensure-server-started)
+  (let*((buffer-name "*node1-shell")
+        (node-name   "node1@127.0.0.1")
+        (command (list "~/.emacs.d/plugins/edts/start_node1"))
+        (root        (expand-file-name (or pwd default-directory))))
+    (let ((buffer (edts-shell-make-comint-buffer
+                   buffer-name
+                   node-name
+                   root
+                   command)))
+      (edts-api-init-node-when-ready node-name node-name root nil)
+      (when switch-to (switch-to-buffer buffer))
+      buffer)))
+
 (defadvice start-process (around edts-shell-start-process-advice)
   "Sets the TERM environment variable to vt100 to ensure that erl is
 compatible with edts-shell. The reason for doing it here is that setting
